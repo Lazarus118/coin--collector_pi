@@ -24,6 +24,7 @@ def _display(n):
             Display.Show(digits)
             Display.ShowDoublepoint(True)
             sleep(0.2)
+        Display.Clear()
 
 
 _display(1)  # zeros on display
@@ -35,7 +36,7 @@ counter = 1
 try:
     while True:
         GPIO.wait_for_edge(27, GPIO.RISING)
-        print "Pulse coming ! (%s)" % counter
+        print("Pulse coming ! (%s)" % counter)
         counter += 1
         _display(2)  # $1.75 on display
 except KeyboardInterrupt:
