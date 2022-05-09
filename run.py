@@ -12,12 +12,21 @@ Display = tm1637.TM1637(CLK=23, DIO=24, brightness=1.0)
 GPIO.setwarnings(False)
 
 
-def _display():
+def _display(n):
     while (True):
-        digits = [0, 1, 7, 5]
-        Display.Show(digits)
-        Display.ShowDoublepoint(True)
-        sleep(0.2)
+        if n == 1:
+            digits = [0, 0, 0, 0]
+            Display.Show(digits)
+            Display.ShowDoublepoint(True)
+            sleep(0.2)
+        if n == 2:
+            digits = [0, 1, 7, 5]
+            Display.Show(digits)
+            Display.ShowDoublepoint(True)
+            sleep(0.2)
+
+
+_display(1)  # zeros on display
 
 
 GPIO.setmode(GPIO.BCM)
@@ -28,5 +37,6 @@ try:
         GPIO.wait_for_edge(27, GPIO.RISING)
         print "Pulse coming ! (%s)" % counter
         counter += 1
+        _display(2)  # $1.75 on display
 except KeyboardInterrupt:
     GPIO.cleanup()
