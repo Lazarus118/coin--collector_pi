@@ -33,11 +33,9 @@ _display(1)  # zeros on display
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 counter = 1
-try:
-    while True:
-        GPIO.wait_for_edge(27, GPIO.RISING)
-        print("Pulse coming ! (%s)" % counter)
-        counter += 1
-        _display(2)  # $1.75 on display
-except KeyboardInterrupt:
+while True:
+    GPIO.wait_for_edge(27, GPIO.RISING)
+    print("Pulse coming ! (%s)" % counter)
+    counter += 1
+    _display(2)  # $1.75 on display
     GPIO.cleanup()
